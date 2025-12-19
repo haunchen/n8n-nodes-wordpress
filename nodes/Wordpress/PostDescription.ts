@@ -91,6 +91,20 @@ export const postFields: INodeProperties[] = [
 				description: 'The content for the post',
 			},
 			{
+				displayName: 'Excerpt',
+				name: 'excerpt',
+				type: 'string',
+				default: '',
+				description: 'The excerpt for the post',
+			},
+			{
+				displayName: 'Featured Media',
+				name: 'featured_media',
+				type: 'number',
+				default: 0,
+				description: 'The ID of the featured media for the post',
+			},
+			{
 				displayName: 'Slug',
 				name: 'slug',
 				type: 'string',

@@ -4,6 +4,8 @@ export interface IPost {
 	id?: number;
 	title?: string;
 	content?: string;
+	excerpt?: string;
+	featured_media?: number;
 	slug?: string;
 	password?: string;
 	status?: string;

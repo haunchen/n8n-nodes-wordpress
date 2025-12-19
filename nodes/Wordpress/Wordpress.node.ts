@@ -199,6 +199,12 @@ export class Wordpress implements INodeType {
 						if (additionalFields.date) {
 							body.date = additionalFields.date as string;
 						}
+						if (additionalFields.excerpt) {
+							body.excerpt = additionalFields.excerpt as string;
+						}
+						if (additionalFields.featured_media) {
+							body.featured_media = additionalFields.featured_media as number;
+						}
 						responseData = await wordpressApiRequest.call(this, 'POST', '/posts', body);
 					}
 					//https://developer.wordpress.org/rest-api/reference/posts/#update-a-post
