@@ -22,15 +22,15 @@ import type { IMedia } from './MediaInterface';
 
 export class Wordpress implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Wordpress',
-		name: 'wordpress',
+		displayName: 'WordPress_Custom',
+		name: 'wordpressCustom',
 		icon: 'file:wordpress.svg',
 		group: ['output'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Consume Wordpress API',
 		defaults: {
-			name: 'Wordpress',
+			name: 'WordPress_Custom',
 		},
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],

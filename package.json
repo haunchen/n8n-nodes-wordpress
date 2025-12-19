@@ -1,5 +1,5 @@
 {
-    "name": "@haunchen/n8n-nodes-wordpress",
+    "name": "@haunchen/n8n-nodes-wordpress-custom",
     "version": "0.1.0",
     "description": "n8n node for WordPress",
     "license": "MIT",
