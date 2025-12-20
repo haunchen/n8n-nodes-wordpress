@@ -206,21 +206,21 @@ export class Wordpress implements INodeType {
 							body.featured_media = additionalFields.featured_media as number;
 						}
 						if (additionalFields.yoastSeo) {
-							const yoastValues = this.getNodeParameter(
-								'additionalFields.yoastSeo.values',
+							const yoastFields = this.getNodeParameter(
+								'additionalFields.yoastSeo.values.fields',
 								i,
 								{},
 							) as IDataObject;
-							if (Object.keys(yoastValues).length > 0) {
+							if (Object.keys(yoastFields).length > 0) {
 								body.meta = {};
-								if (yoastValues.title) {
-									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								if (yoastFields.title) {
+									body.meta['_yoast_wpseo_title'] = yoastFields.title as string;
 								}
-								if (yoastValues.metadesc) {
-									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								if (yoastFields.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastFields.metadesc as string;
 								}
-								if (yoastValues.focuskw) {
-									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								if (yoastFields.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastFields.focuskw as string;
 								}
 							}
 						}
@@ -280,21 +280,21 @@ export class Wordpress implements INodeType {
 							body.date = updateFields.date as string;
 						}
 						if (updateFields.yoastSeo) {
-							const yoastValues = this.getNodeParameter(
-								'updateFields.yoastSeo.values',
+							const yoastFields = this.getNodeParameter(
+								'updateFields.yoastSeo.values.fields',
 								i,
 								{},
 							) as IDataObject;
-							if (Object.keys(yoastValues).length > 0) {
+							if (Object.keys(yoastFields).length > 0) {
 								body.meta = {};
-								if (yoastValues.title) {
-									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								if (yoastFields.title) {
+									body.meta['_yoast_wpseo_title'] = yoastFields.title as string;
 								}
-								if (yoastValues.metadesc) {
-									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								if (yoastFields.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastFields.metadesc as string;
 								}
-								if (yoastValues.focuskw) {
-									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								if (yoastFields.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastFields.focuskw as string;
 								}
 							}
 						}
@@ -424,21 +424,21 @@ export class Wordpress implements INodeType {
 							body.featured_media = additionalFields.featuredMediaId as number;
 						}
 						if (additionalFields.yoastSeo) {
-							const yoastValues = this.getNodeParameter(
-								'additionalFields.yoastSeo.values',
+							const yoastFields = this.getNodeParameter(
+								'additionalFields.yoastSeo.values.fields',
 								i,
 								{},
 							) as IDataObject;
-							if (Object.keys(yoastValues).length > 0) {
+							if (Object.keys(yoastFields).length > 0) {
 								body.meta = {};
-								if (yoastValues.title) {
-									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								if (yoastFields.title) {
+									body.meta['_yoast_wpseo_title'] = yoastFields.title as string;
 								}
-								if (yoastValues.metadesc) {
-									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								if (yoastFields.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastFields.metadesc as string;
 								}
-								if (yoastValues.focuskw) {
-									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								if (yoastFields.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastFields.focuskw as string;
 								}
 							}
 						}
@@ -492,21 +492,21 @@ export class Wordpress implements INodeType {
 							body.featured_media = updateFields.featuredMediaId as number;
 						}
 						if (updateFields.yoastSeo) {
-							const yoastValues = this.getNodeParameter(
-								'updateFields.yoastSeo.values',
+							const yoastFields = this.getNodeParameter(
+								'updateFields.yoastSeo.values.fields',
 								i,
 								{},
 							) as IDataObject;
-							if (Object.keys(yoastValues).length > 0) {
+							if (Object.keys(yoastFields).length > 0) {
 								body.meta = {};
-								if (yoastValues.title) {
-									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								if (yoastFields.title) {
+									body.meta['_yoast_wpseo_title'] = yoastFields.title as string;
 								}
-								if (yoastValues.metadesc) {
-									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								if (yoastFields.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastFields.metadesc as string;
 								}
-								if (yoastValues.focuskw) {
-									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								if (yoastFields.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastFields.focuskw as string;
 								}
 							}
 						}
