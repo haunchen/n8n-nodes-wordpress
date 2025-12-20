@@ -16,4 +16,5 @@ export interface IPost {
 	template?: string;
 	categories?: number[];
 	tags?: number[];
+	meta?: { [key: string]: string };
 }

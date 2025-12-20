@@ -13,4 +13,5 @@ export interface IPage {
 	status?: string;
 	template?: string;
 	title?: string;
+	meta?: { [key: string]: string };
 }

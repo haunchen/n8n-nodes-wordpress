@@ -255,6 +255,51 @@ export const pageFields: INodeProperties[] = [
 				default: '',
 				description: 'The ID of the featured media for the page',
 			},
+			{
+				displayName: 'Yoast SEO',
+				name: 'yoastSeo',
+				type: 'fixedCollection',
+				default: {},
+				typeOptions: {
+					multipleValues: false,
+				},
+				options: [
+					{
+						displayName: 'SEO Settings',
+						name: 'values',
+						values: [
+							{
+								displayName:
+									'These meta fields must be exposed in WordPress REST API. Use <code>register_post_meta()</code> in functions.php or a plugin to enable writing.',
+								name: 'notice',
+								type: 'notice',
+								default: '',
+							},
+							{
+								displayName: 'SEO Title',
+								name: 'title',
+								type: 'string',
+								default: '',
+								description: 'The title displayed in search engine results',
+							},
+							{
+								displayName: 'Meta Description',
+								name: 'metadesc',
+								type: 'string',
+								default: '',
+								description: 'The description displayed in search engine results',
+							},
+							{
+								displayName: 'Focus Keyword',
+								name: 'focuskw',
+								type: 'string',
+								default: '',
+								description: 'The primary keyword for SEO optimization',
+							},
+						],
+					},
+				],
+			},
 		],
 	},
 	/* -------------------------------------------------------------------------- */
@@ -493,6 +538,51 @@ export const pageFields: INodeProperties[] = [
 				type: 'number',
 				default: '',
 				description: 'The ID of the featured media for the page',
+			},
+			{
+				displayName: 'Yoast SEO',
+				name: 'yoastSeo',
+				type: 'fixedCollection',
+				default: {},
+				typeOptions: {
+					multipleValues: false,
+				},
+				options: [
+					{
+						displayName: 'SEO Settings',
+						name: 'values',
+						values: [
+							{
+								displayName:
+									'These meta fields must be exposed in WordPress REST API. Use <code>register_post_meta()</code> in functions.php or a plugin to enable writing.',
+								name: 'notice',
+								type: 'notice',
+								default: '',
+							},
+							{
+								displayName: 'SEO Title',
+								name: 'title',
+								type: 'string',
+								default: '',
+								description: 'The title displayed in search engine results',
+							},
+							{
+								displayName: 'Meta Description',
+								name: 'metadesc',
+								type: 'string',
+								default: '',
+								description: 'The description displayed in search engine results',
+							},
+							{
+								displayName: 'Focus Keyword',
+								name: 'focuskw',
+								type: 'string',
+								default: '',
+								description: 'The primary keyword for SEO optimization',
+							},
+						],
+					},
+				],
 			},
 		],
 	},

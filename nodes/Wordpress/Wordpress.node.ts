@@ -205,6 +205,25 @@ export class Wordpress implements INodeType {
 						if (additionalFields.featured_media) {
 							body.featured_media = additionalFields.featured_media as number;
 						}
+						if (additionalFields.yoastSeo) {
+							const yoastValues = this.getNodeParameter(
+								'additionalFields.yoastSeo.values',
+								i,
+								{},
+							) as IDataObject;
+							if (Object.keys(yoastValues).length > 0) {
+								body.meta = {};
+								if (yoastValues.title) {
+									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								}
+								if (yoastValues.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								}
+								if (yoastValues.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								}
+							}
+						}
 						responseData = await wordpressApiRequest.call(this, 'POST', '/posts', body);
 					}
 					//https://developer.wordpress.org/rest-api/reference/posts/#update-a-post
@@ -259,6 +278,25 @@ export class Wordpress implements INodeType {
 						}
 						if (updateFields.date) {
 							body.date = updateFields.date as string;
+						}
+						if (updateFields.yoastSeo) {
+							const yoastValues = this.getNodeParameter(
+								'updateFields.yoastSeo.values',
+								i,
+								{},
+							) as IDataObject;
+							if (Object.keys(yoastValues).length > 0) {
+								body.meta = {};
+								if (yoastValues.title) {
+									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								}
+								if (yoastValues.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								}
+								if (yoastValues.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								}
+							}
 						}
 						responseData = await wordpressApiRequest.call(this, 'POST', `/posts/${postId}`, body);
 					}
@@ -385,6 +423,25 @@ export class Wordpress implements INodeType {
 						if (additionalFields.featuredMediaId) {
 							body.featured_media = additionalFields.featuredMediaId as number;
 						}
+						if (additionalFields.yoastSeo) {
+							const yoastValues = this.getNodeParameter(
+								'additionalFields.yoastSeo.values',
+								i,
+								{},
+							) as IDataObject;
+							if (Object.keys(yoastValues).length > 0) {
+								body.meta = {};
+								if (yoastValues.title) {
+									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								}
+								if (yoastValues.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								}
+								if (yoastValues.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								}
+							}
+						}
 						responseData = await wordpressApiRequest.call(this, 'POST', '/pages', body);
 					}
 					//https://developer.wordpress.org/rest-api/reference/pages/#update-a-page
@@ -433,6 +490,25 @@ export class Wordpress implements INodeType {
 						}
 						if (updateFields.featuredMediaId) {
 							body.featured_media = updateFields.featuredMediaId as number;
+						}
+						if (updateFields.yoastSeo) {
+							const yoastValues = this.getNodeParameter(
+								'updateFields.yoastSeo.values',
+								i,
+								{},
+							) as IDataObject;
+							if (Object.keys(yoastValues).length > 0) {
+								body.meta = {};
+								if (yoastValues.title) {
+									body.meta['_yoast_wpseo_title'] = yoastValues.title as string;
+								}
+								if (yoastValues.metadesc) {
+									body.meta['_yoast_wpseo_metadesc'] = yoastValues.metadesc as string;
+								}
+								if (yoastValues.focuskw) {
+									body.meta['_yoast_wpseo_focuskw'] = yoastValues.focuskw as string;
+								}
+							}
 						}
 						responseData = await wordpressApiRequest.call(this, 'POST', `/pages/${pageId}`, body);
 					}
