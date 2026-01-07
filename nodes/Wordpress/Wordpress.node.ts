@@ -11,10 +11,14 @@ import type {
 import { NodeApiError, NodeConnectionTypes } from 'n8n-workflow';
 
 import { wordpressApiRequest, wordpressApiRequestAllItems } from './GenericFunctions';
+import { categoryFields, categoryOperations } from './CategoryDescription';
+import type { ICategory } from './CategoryInterface';
 import { pageFields, pageOperations } from './PageDescription';
 import type { IPage } from './PageInterface';
 import { postFields, postOperations } from './PostDescription';
 import type { IPost } from './PostInterface';
+import { tagFields, tagOperations } from './TagDescription';
+import type { ITag } from './TagInterface';
 import { userFields, userOperations } from './UserDescription';
 import type { IUser } from './UserInterface';
 import { mediaFields, mediaOperations } from './MediaDescription';
@@ -49,32 +53,44 @@ export class Wordpress implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Post',
-						value: 'post',
+						name: 'Category',
+						value: 'category',
+					},
+					{
+						name: 'Media',
+						value: 'media',
 					},
 					{
 						name: 'Page',
 						value: 'page',
 					},
 					{
-						name: 'User',
-						value: 'user',
+						name: 'Post',
+						value: 'post',
 					},
 					{
-						name: 'Media',
-						value: 'media',
+						name: 'Tag',
+						value: 'tag',
+					},
+					{
+						name: 'User',
+						value: 'user',
 					},
 				],
 				default: 'post',
 			},
-			...postOperations,
-			...postFields,
-			...pageOperations,
-			...pageFields,
-			...userOperations,
-			...userFields,
+			...categoryOperations,
+			...categoryFields,
 			...mediaOperations,
 			...mediaFields,
+			...pageOperations,
+			...pageFields,
+			...postOperations,
+			...postFields,
+			...tagOperations,
+			...tagFields,
+			...userOperations,
+			...userFields,
 		],
 	};
 
@@ -904,6 +920,204 @@ export class Wordpress implements INodeType {
 							}
 							throw error;
 						}
+					}
+				}
+				if (resource === 'category') {
+					//https://developer.wordpress.org/rest-api/reference/categories/#create-a-category
+					if (operation === 'create') {
+						const name = this.getNodeParameter('name', i) as string;
+						const additionalFields = this.getNodeParameter('additionalFields', i);
+						const body: ICategory = {
+							name,
+						};
+						if (additionalFields.description) {
+							body.description = additionalFields.description as string;
+						}
+						if (additionalFields.slug) {
+							body.slug = additionalFields.slug as string;
+						}
+						if (additionalFields.parent) {
+							body.parent = additionalFields.parent as number;
+						}
+						responseData = await wordpressApiRequest.call(this, 'POST', '/categories', body);
+					}
+					//https://developer.wordpress.org/rest-api/reference/categories/#update-a-category
+					if (operation === 'update') {
+						const categoryId = this.getNodeParameter('categoryId', i) as string;
+						const updateFields = this.getNodeParameter('updateFields', i);
+						const body: ICategory = {};
+						if (updateFields.name) {
+							body.name = updateFields.name as string;
+						}
+						if (updateFields.description) {
+							body.description = updateFields.description as string;
+						}
+						if (updateFields.slug) {
+							body.slug = updateFields.slug as string;
+						}
+						if (updateFields.parent) {
+							body.parent = updateFields.parent as number;
+						}
+						responseData = await wordpressApiRequest.call(
+							this,
+							'POST',
+							`/categories/${categoryId}`,
+							body,
+						);
+					}
+					//https://developer.wordpress.org/rest-api/reference/categories/#retrieve-a-category
+					if (operation === 'get') {
+						const categoryId = this.getNodeParameter('categoryId', i) as string;
+						const options = this.getNodeParameter('options', i);
+						if (options.context) {
+							qs.context = options.context as string;
+						}
+						responseData = await wordpressApiRequest.call(
+							this,
+							'GET',
+							`/categories/${categoryId}`,
+							{},
+							qs,
+						);
+					}
+					//https://developer.wordpress.org/rest-api/reference/categories/#list-categories
+					if (operation === 'getAll') {
+						const returnAll = this.getNodeParameter('returnAll', i);
+						const options = this.getNodeParameter('options', i);
+						if (options.context) {
+							qs.context = options.context as string;
+						}
+						if (options.orderby) {
+							qs.orderby = options.orderby as string;
+						}
+						if (options.order) {
+							qs.order = options.order as string;
+						}
+						if (options.search) {
+							qs.search = options.search as string;
+						}
+						if (options.hide_empty) {
+							qs.hide_empty = options.hide_empty as boolean;
+						}
+						if (options.parent !== undefined) {
+							qs.parent = options.parent as number;
+						}
+						if (options.slug) {
+							qs.slug = options.slug as string;
+						}
+						if (returnAll) {
+							responseData = await wordpressApiRequestAllItems.call(
+								this,
+								'GET',
+								'/categories',
+								{},
+								qs,
+							);
+						} else {
+							qs.per_page = this.getNodeParameter('limit', i);
+							responseData = await wordpressApiRequest.call(this, 'GET', '/categories', {}, qs);
+						}
+					}
+					//https://developer.wordpress.org/rest-api/reference/categories/#delete-a-category
+					if (operation === 'delete') {
+						const categoryId = this.getNodeParameter('categoryId', i) as string;
+						const options = this.getNodeParameter('options', i);
+						if (options.force) {
+							qs.force = options.force as boolean;
+						}
+						responseData = await wordpressApiRequest.call(
+							this,
+							'DELETE',
+							`/categories/${categoryId}`,
+							{},
+							qs,
+						);
+					}
+				}
+				if (resource === 'tag') {
+					//https://developer.wordpress.org/rest-api/reference/tags/#create-a-tag
+					if (operation === 'create') {
+						const name = this.getNodeParameter('name', i) as string;
+						const additionalFields = this.getNodeParameter('additionalFields', i);
+						const body: ITag = {
+							name,
+						};
+						if (additionalFields.description) {
+							body.description = additionalFields.description as string;
+						}
+						if (additionalFields.slug) {
+							body.slug = additionalFields.slug as string;
+						}
+						responseData = await wordpressApiRequest.call(this, 'POST', '/tags', body);
+					}
+					//https://developer.wordpress.org/rest-api/reference/tags/#update-a-tag
+					if (operation === 'update') {
+						const tagId = this.getNodeParameter('tagId', i) as string;
+						const updateFields = this.getNodeParameter('updateFields', i);
+						const body: ITag = {};
+						if (updateFields.name) {
+							body.name = updateFields.name as string;
+						}
+						if (updateFields.description) {
+							body.description = updateFields.description as string;
+						}
+						if (updateFields.slug) {
+							body.slug = updateFields.slug as string;
+						}
+						responseData = await wordpressApiRequest.call(this, 'POST', `/tags/${tagId}`, body);
+					}
+					//https://developer.wordpress.org/rest-api/reference/tags/#retrieve-a-tag
+					if (operation === 'get') {
+						const tagId = this.getNodeParameter('tagId', i) as string;
+						const options = this.getNodeParameter('options', i);
+						if (options.context) {
+							qs.context = options.context as string;
+						}
+						responseData = await wordpressApiRequest.call(this, 'GET', `/tags/${tagId}`, {}, qs);
+					}
+					//https://developer.wordpress.org/rest-api/reference/tags/#list-tags
+					if (operation === 'getAll') {
+						const returnAll = this.getNodeParameter('returnAll', i);
+						const options = this.getNodeParameter('options', i);
+						if (options.context) {
+							qs.context = options.context as string;
+						}
+						if (options.orderby) {
+							qs.orderby = options.orderby as string;
+						}
+						if (options.order) {
+							qs.order = options.order as string;
+						}
+						if (options.search) {
+							qs.search = options.search as string;
+						}
+						if (options.hide_empty) {
+							qs.hide_empty = options.hide_empty as boolean;
+						}
+						if (options.slug) {
+							qs.slug = options.slug as string;
+						}
+						if (returnAll) {
+							responseData = await wordpressApiRequestAllItems.call(this, 'GET', '/tags', {}, qs);
+						} else {
+							qs.per_page = this.getNodeParameter('limit', i);
+							responseData = await wordpressApiRequest.call(this, 'GET', '/tags', {}, qs);
+						}
+					}
+					//https://developer.wordpress.org/rest-api/reference/tags/#delete-a-tag
+					if (operation === 'delete') {
+						const tagId = this.getNodeParameter('tagId', i) as string;
+						const options = this.getNodeParameter('options', i);
+						if (options.force) {
+							qs.force = options.force as boolean;
+						}
+						responseData = await wordpressApiRequest.call(
+							this,
+							'DELETE',
+							`/tags/${tagId}`,
+							{},
+							qs,
+						);
 					}
 				}
 				const executionData = this.helpers.constructExecutionMetaData(
