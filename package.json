@@ -34,7 +34,8 @@
             "dist/credentials/WordpressApi.credentials.js"
         ],
         "nodes": [
-            "dist/nodes/Wordpress/Wordpress.node.js"
+            "dist/nodes/Wordpress/Wordpress.node.js",
+            "dist/nodes/Wordpress/WordpressTrigger.node.js"
         ]
     },
     "devDependencies": {
